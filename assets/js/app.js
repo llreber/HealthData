@@ -56,22 +56,36 @@ d3.csv("data.csv")
     chartGroup.append("g")
       .call(leftAxis);
 
+    // Create axes labels
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "aText")
+      .text("Obesity Rate (%)");
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "aText")
+      .text("Poverty Rate (%)");
+
     // Step 5: Create Circles
     // ==============================
 
 
     var circlesGroup = chartGroup.selectAll("circle")
       .data(allData)
-      .enter()
+      .enter();
+
+      circlesGroup
       .append("circle")
       .attr("cx", d => xLinearScale(d.poverty))
       .attr("cy", d => yLinearScale(d.obesity))
       .attr("r", "15")
       .attr("class", "stateCircle");
 
-      chartGroup.selectAll("text")
-      .data(allData)
-      .enter()
+      circlesGroup
       .append("text")
       .attr("x", d => xLinearScale(d.poverty))
       .attr("y", d => yLinearScale(d.obesity)+5)
@@ -105,18 +119,6 @@ d3.csv("data.csv")
     circlesGroup.on("mouseout", function(d){
       toolTip.hide(d, this);
     });
-    // Create axes labels
-    chartGroup.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
-      .attr("x", 0 - (height / 2))
-      .attr("dy", "1em")
-      .attr("class", "axisText")
-      .text("Obesity Rate (%)");
-
-    chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-      .attr("class", "axisText")
-      .text("Poverty Rate (%)");
+    
 
   });
