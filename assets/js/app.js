@@ -92,33 +92,4 @@ d3.csv("data.csv")
       .text(function(d, i=0){return `${d.abbr}`}) 
       .attr("class", "stateText");
 
-
-      
-    // Step 6: Initialize tool tip
-    // ==============================
-    var toolTip = d3.tip()
-    .attr("class", "d3-tip")
-    .offset([80, -60])
-    .html(function(d){
-      return(`${d.state}
-              <br>
-              Poverty Rate: ${d.poverty}
-              <br>
-              Obesity Rate: ${d.obesity}`)
-    });
-    // Step 7: Create tooltip in the chart
-    // ==============================
-    chartGroup.call(toolTip);
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
-    
-
-    circlesGroup.on("mouseover", function(d){
-      toolTip.show(d, this);
-    });
-    circlesGroup.on("mouseout", function(d){
-      toolTip.hide(d, this);
-    });
-    
-
   });
